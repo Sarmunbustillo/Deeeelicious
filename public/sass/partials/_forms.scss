@@ -1,6 +1,7 @@
-input, textarea {
-  width:100%;
-  padding:10px;
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
   border: 1px solid $grey;
   &.input {
     &--error {
@@ -12,6 +13,11 @@ input, textarea {
 label {
   padding: 10px 0;
   display: block;
+}
+
+label:nth-child(1),
+label:nth-child(1) ~ label {
+  color: white;
 }
 
 .form {
