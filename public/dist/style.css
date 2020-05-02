@@ -519,24 +519,20 @@ label {
   label #photo {
     margin: 10px 0 0; }
 
-label:nth-child(1),
-label:nth-child(1) ~ label {
-  color: white; }
-
 .form {
-  background: white;
+  background: #303030;
   padding: 2rem;
-  box-shadow: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #ffc40e 85%, #48ded4 95%); }
+  box-shadow: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, #ffc40e 85%, #48ded4 95%);
+  color: #ffff; }
   .form + .form {
     margin-top: 4rem; }
   .form h2 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 2.5rem;
     padding-bottom: 2rem;
     margin-bottom: 2rem;
-    border-bottom: 1px solid #e6e6e6; }
-  .form .button {
-    margin-top: 25px; }
+    border-bottom: 1px solid #e6e6e6;
+    color: #ffff; }
 
 .search {
   position: relative;
@@ -1134,7 +1130,8 @@ label:nth-child(1) ~ label {
   background: #ffc40e;
   color: #303030;
   font-family: 'Panama';
-  font-weight: 600; }
+  font-weight: 600;
+  margin-top: 25px; }
 
 .avatar {
   min-width: 50px;
@@ -1148,6 +1145,8 @@ label:nth-child(1) ~ label {
   background: #303030;
   padding: 5rem;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15); }
+  .card label {
+    color: #ffff; }
 
 pre.error {
   padding: 5rem;

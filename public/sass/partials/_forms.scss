@@ -19,28 +19,21 @@ label {
   }
 }
 
-label:nth-child(1),
-label:nth-child(1) ~ label {
-  color: white;
-}
-
 .form {
-  background: white;
+  background: $black;
   padding: 2rem;
   box-shadow: $grad;
+  color: $white;
   & + .form {
     margin-top: 4rem;
   }
   // I know this isn't bem but meh
   h2 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 2.5rem;
     padding-bottom: 2rem;
     margin-bottom: 2rem;
     border-bottom: 1px solid $grey;
-  }
-
-  .button {
-    margin-top: 25px;
+    color: $white;
   }
 }

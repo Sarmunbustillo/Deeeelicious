@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 const md5 = require('md5');
 const validator = require('validator');
-const mongodErrorHandler = require('moongose-mongodb-errors');
-const passportLocalMongoose = require('password-local-mongoose');
+const mongodErrorHandler = require('mongoose-mongodb-errors');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new Schema({
   email: {
@@ -22,6 +22,13 @@ const userSchema = new Schema({
       trim: true,
     },
   },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
+});
+
+userSchema.virtual('gravatar').get(function () {
+  const hash = md5(this.email);
+  return `https://gravatar.com/avatar/${hash}?=200`;
 });
 
 //passport.js will help with the auth and passportLocalMongoose is a plugin that helps adding the fields for it
@@ -31,4 +38,4 @@ userSchema.plugin(passportLocalMongoose, {
 //helps giving nicer error messages
 userSchema.plugin(mongodErrorHandler);
 
-module.exports = moongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);
