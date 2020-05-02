@@ -535,6 +535,8 @@ label:nth-child(1) ~ label {
     padding-bottom: 2rem;
     margin-bottom: 2rem;
     border-bottom: 1px solid #e6e6e6; }
+  .form .button {
+    margin-top: 25px; }
 
 .search {
   position: relative;

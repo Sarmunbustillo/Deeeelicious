@@ -39,4 +39,8 @@ label:nth-child(1) ~ label {
     margin-bottom: 2rem;
     border-bottom: 1px solid $grey;
   }
+
+  .button {
+    margin-top: 25px;
+  }
 }
