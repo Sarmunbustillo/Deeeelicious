@@ -27,6 +27,7 @@ exports.addStore = (req, res) => {
 };
 
 exports.createStore = async (req, res) => {
+  req.body.author = req.user._id;
   const store = await new Store(req.body).save();
   await store.save();
   req.flash('success', `Successfully Created ${store.name}. Care to leave a review?`);
@@ -57,13 +58,18 @@ exports.getStores = async (req, res) => {
   res.render('stores', { title: 'Stores', stores });
 };
 
+//before they can edit the store confirm that they are the actual owner
+const confirmOwner = (store, user) => {
+  if (!store.author.equals(user._id)) {
+    throw Error('You must own a store in order to edit it!');
+  }
+};
 exports.editStore = async (req, res) => {
   // find store given ID
   const store = await Store.findOne({ _id: req.params.id });
 
   // comfirm they are the owner of the store
-  //todo
-
+  confirmOwner(store, req.user);
   // render out the edit form so the user can update store
   res.render('editStore', { title: `Edit ${store.name}`, store });
 };
@@ -86,7 +92,8 @@ exports.updateStore = async (req, res) => {
 };
 
 exports.getStoreBySlug = async (req, res, next) => {
-  const store = await Store.findOne({ slug: req.params.slug });
+  //.populate will find and populate by the related/associated id
+  const store = await (await Store.findOne({ slug: req.params.slug })).populate('author');
   if (!store) return next(); // the slug does not exists
   res.render('store', { store, title: store.name });
 };
