@@ -24,6 +24,11 @@ const userSchema = new Schema({
   },
   resetPasswordToken: String,
   resetPasswordExpires: Date,
+  hearts:[
+    {
+      type: mongoose.Schema.ObjectId, ref: 'Store'
+    }
+  ]
 });
 
 userSchema.virtual('gravatar').get(function () {
@@ -37,5 +42,6 @@ userSchema.plugin(passportLocalMongoose, {
 });
 //helps giving nicer error messages
 userSchema.plugin(mongodErrorHandler);
+
 
 module.exports = mongoose.model('User', userSchema);
