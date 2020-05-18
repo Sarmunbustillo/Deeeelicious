@@ -165,3 +165,13 @@ exports.heartStore = async (req, res) => {
   );
   res.json(user);
 };
+
+//get stores by hearts
+exports.getHearts = async (req, res) => {
+  //find in stores the stores that the id (id and hearts are the same value) is in the hearts array
+  const stores = await Store.find({
+    _id: { $in: req.user.hearts },
+  });
+
+  res.render('stores', { title: 'Liked Stores', stores });
+};
