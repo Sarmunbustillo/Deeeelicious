@@ -1134,6 +1134,14 @@ label {
   font-family: 'Panama';
   font-weight: 600;
   margin-top: 25px; }
+  .button--review {
+    border: 0;
+    background: #ffc40e;
+    color: #303030;
+    font-family: 'Panama';
+    font-weight: 600;
+    margin-top: 25px;
+    margin-top: 0; }
 
 .avatar {
   min-width: 50px;

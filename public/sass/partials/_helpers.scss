@@ -10,6 +10,16 @@
   font-family: 'Panama';
   font-weight: 600;
   margin-top: 25px;
+
+  &--review {
+    border: 0;
+    background: $yellow;
+    color: $black;
+    font-family: 'Panama';
+    font-weight: 600;
+    margin-top: 25px;
+    margin-top: 0;
+  }
 }
 
 .avatar {
