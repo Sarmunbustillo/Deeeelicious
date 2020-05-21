@@ -1038,6 +1038,7 @@ label {
       .reviewer__stars input:checked ~ label {
         color: #ffc40e; }
       .reviewer__stars input + label {
+        cursor: pointer;
         font-size: 0;
         /* These are in the opposite DOM order
            re-order them to be visually in normal order
@@ -1046,22 +1047,23 @@ label {
         .reviewer__stars input + label:before {
           content: '\2605';
           font-size: 2rem; }
-        .reviewer__stars input + label[for="star5"] {
+        .reviewer__stars input + label[for='star5'] {
           -ms-flex-order: 5;
               order: 5; }
-        .reviewer__stars input + label[for="star4"] {
+        .reviewer__stars input + label[for='star4'] {
           -ms-flex-order: 4;
               order: 4; }
-        .reviewer__stars input + label[for="star3"] {
+        .reviewer__stars input + label[for='star3'] {
           -ms-flex-order: 3;
               order: 3; }
-        .reviewer__stars input + label[for="star2"] {
+        .reviewer__stars input + label[for='star2'] {
           -ms-flex-order: 2;
               order: 2; }
-        .reviewer__stars input + label[for="star1"] {
+        .reviewer__stars input + label[for='star1'] {
           -ms-flex-order: 1;
               order: 1; }
-        .reviewer__stars input + label:hover, .reviewer__stars input + label:hover ~ label {
+        .reviewer__stars input + label:hover,
+        .reviewer__stars input + label:hover ~ label {
           color: #ffdd74; }
   .reviewer textarea {
     border: 0;

@@ -3,7 +3,7 @@ const Review = mongoose.model('Review');
 
 //this is the data we are submitting with the review form
 exports.addReview = async (req, res) => {
-  //save the author and the store that is coming along
+  //save the author and the store.  That data is coming along when submitting the form
   req.body.author = req.user._id;
   req.body.store = req.params.id;
   //pass it to the Schema

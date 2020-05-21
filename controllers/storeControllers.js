@@ -94,7 +94,7 @@ exports.updateStore = async (req, res) => {
 
 exports.getStoreBySlug = async (req, res, next) => {
   //.populate will find and populate by the related/associated id
-  const store = await (await Store.findOne({ slug: req.params.slug })).populate('author');
+  const store = await Store.findOne({ slug: req.params.slug }).populate('author reviews');
   if (!store) return next(); // the slug does not exists
   res.render('store', { store, title: store.name });
 };
@@ -175,3 +175,4 @@ exports.getHearts = async (req, res) => {
 
   res.render('stores', { title: 'Liked Stores', stores });
 };
+
