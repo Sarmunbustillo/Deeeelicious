@@ -758,6 +758,10 @@ label {
   @media all and (max-width: 550px) {
     .store {
       width: 100%; } }
+  .store .title a:hover {
+    transition: all 0.3s ease;
+    background-image: linear-gradient(to right, #303030 100%, #303030 50%);
+    color: #ffc40e; }
 
 .store__actions {
   position: relative;
@@ -777,6 +781,10 @@ label {
 
 .store__action {
   font-size: 10px; }
+  .store__action:hover {
+    -ms-transform: scale(1.1);
+        transform: scale(1.1);
+    cursor: pointer; }
   .store__action svg {
     width: 25px;
     fill: white; }
@@ -934,7 +942,12 @@ label {
   background: none;
   border: 0;
   outline: 0;
-  position: relative; }
+  position: relative;
+  transition: all 0.1s ease; }
+  .heart__button:hover {
+    -ms-transform: scale(1.1);
+        transform: scale(1.1);
+    cursor: pointer; }
   .heart__button:after {
     content: '\2665\FE0F';
     color: red;

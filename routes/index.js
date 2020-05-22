@@ -6,9 +6,10 @@ const authController = require('../controllers/authControllers');
 const reviewController = require('../controllers/reviewControllers');
 const { catchErrors } = require('../handlers/errorHandlers');
 
-//create a store  (making sure the are logged in)
+//create a store  (making sure the are logged in) also pagination
 router.get('/', catchErrors(storeController.getStores));
 router.get('/stores', catchErrors(storeController.getStores));
+router.get('/stores/page/:page', catchErrors(storeController.getStores));
 router.get('/add', authController.isLoggedIn, storeController.addStore);
 
 //save created a store to db
@@ -61,6 +62,8 @@ router.get('/map', storeController.mapPage);
 router.get('/hearts', authController.isLoggedIn, catchErrors(storeController.getHearts));
 
 router.post('/reviews/:id', authController.isLoggedIn, catchErrors(reviewController.addReview));
+
+router.get('/top', catchErrors(storeController.getTopStores));
 
 //API
 

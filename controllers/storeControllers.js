@@ -53,10 +53,28 @@ exports.resize = async (req, res, next) => {
   next();
 };
 
+//with pagination
 exports.getStores = async (req, res) => {
+  const page = req.params.page || 1;
+  const limit = 6;
+  const skip = page * limit - limit;
+
   // 1. Query the database for a list of all stores
-  const stores = await Store.find();
-  res.render('stores', { title: 'Stores', stores });
+  const storesPromise = Store.find().skip(skip).limit(limit).sort({ created: 'desc' });
+  //returns how many items there are in the document
+  const countPromise = Store.count();
+  //wait until both are ready
+  const [stores, count] = await Promise.all([storesPromise, countPromise]);
+  //how many pages there are
+  const pages = Math.ceil(count / limit);
+  //if the try to go to a page that does not exists in the url
+  if (!stores.length && skip) {
+    req.flash('info', `Hey! you asked for page ${page}. But that doesn't exists. So I put you on page ${pages}`);
+    res.redirect(`/stores/page/${pages}`);
+    return;
+  }
+
+  res.render('stores', { title: 'Stores', stores, page, pages, count });
 };
 
 //before they can edit the store confirm that they are the actual owner
@@ -176,3 +194,7 @@ exports.getHearts = async (req, res) => {
   res.render('stores', { title: 'Liked Stores', stores });
 };
 
+exports.getTopStores = async (req, res) => {
+  const stores = await Store.getTopStores();
+  res.render('topStores', { stores, title: '\u2605 Top Stores!' });
+};

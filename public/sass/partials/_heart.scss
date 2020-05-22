@@ -4,6 +4,11 @@
     border: 0;
     outline: 0;
     position: relative;
+    transition: all 0.1s ease;
+    &:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
     &:after {
       content: '♥️';
       color: red;
@@ -35,10 +40,18 @@
     left: 0;
     opacity: 1;
   }
-  20% { left: 20px; }
-  40% { left: -20px; }
-  60% { left: 20px; }
-  80% { left: -20px; }
+  20% {
+    left: 20px;
+  }
+  40% {
+    left: -20px;
+  }
+  60% {
+    left: 20px;
+  }
+  80% {
+    left: -20px;
+  }
   100% {
     transform: translateY(-400px);
     opacity: 0;

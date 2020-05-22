@@ -84,11 +84,64 @@ storeSchema.statics.getTagsList = function () {
   ]);
 };
 
+//populate the store with the reviews
+//the first 'reviews' is our Review Schema, but mangdb converts it to lowercase and adds a s at the end. a1
+//the second one is the naming of the property in the object
+storeSchema.statics.getTopStores = function () {
+  return this.aggregate([
+    //lookup Stores and populate their reviews
+    {
+      $lookup: {
+        from: 'reviews',
+        localField: '_id',
+        foreignField: 'store',
+        as: 'reviews',
+      },
+    },
+    //filter for only items have 2 or more reviews
+    //the .1 is the index in the array that is how it works in mangodb
+    {
+      $match: { 'reviews.1': { $exists: true } },
+    },
+
+    // add the average field
+    // project add a field to the actual one, but one has to specify what other fields to bring from the document model
+    {
+      $project: {
+        photo: '$$ROOT.photo',
+        name: '$$ROOT.name',
+        reviews: '$$ROOT.reviews',
+        slug: '$$ROOT.slug',
+        averageRating: { $avg: '$reviews.rating' },
+      },
+    },
+
+    // sort by our field, highest reviews first
+    {
+      $sort: {
+        averageRating: -1,
+      },
+    },
+
+    // limit at most 10
+    {
+      $limit: 10,
+    },
+  ]);
+};
+
 //find reviews where the stores ._id property === reviews store property
 storeSchema.virtual('reviews', {
   ref: 'Review', // what model to link?
   localField: '_id', // which field on the store?
   foreignField: 'store', // which field on the review ?
 });
+
+function autopopulate(next) {
+  this.populate('reviews');
+  next();
+}
+storeSchema.pre('find', autopopulate);
+storeSchema.pre('findOne', autopopulate);
 
 module.exports = mongoose.model('Store', storeSchema);

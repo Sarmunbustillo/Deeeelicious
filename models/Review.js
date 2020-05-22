@@ -9,16 +9,16 @@ const reviewSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
-    required: 'You must supply an author',
+    required: 'You must supply an author!',
   },
   store: {
     type: mongoose.Schema.ObjectId,
     ref: 'Store',
-    required: 'You must supply an author!',
+    required: 'You must supply a store!',
   },
   text: {
     type: String,
-    required: 'Your Review must have text!',
+    required: 'Your review must have text!',
   },
   rating: {
     type: Number,
@@ -35,4 +35,5 @@ function autopopulate(next) {
 //these are hooks, when  'find or findOne' then run the func
 reviewSchema.pre('find', autopopulate);
 reviewSchema.pre('findOne', autopopulate);
+
 module.exports = mongoose.model('Review', reviewSchema);
